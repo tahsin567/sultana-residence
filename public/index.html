@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sultana Residence | Luxury Redefined</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Sultana Residence</a>
+    <div class="collapse navbar-collapse" id="navbarLuxury">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#roomsDisplay">ROOMS</a></li>
+        <li class="nav-item"><a class="nav-link" href="#book">BOOK</a></li>
+        <li class="nav-item"><a class="nav-link" href="#viewBookingSection">VIEW BOOKING</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">GALLERY</a></li>
+    <a href="#book" class="btn btn-luxury" id="accountBtn">BOOK NOW</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-section">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12 text-center">
+          <h1 class="hero-title">Welcome To Our Hotel</h1>
+          <p class="hero-subtitle">Where Luxury Meets Timeless Elegance</p>
+          <a href="#book" class="btn btn-luxury btn-lg mt-4">Book Your Stay</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room Cards Section -->
+  <section id="roomsDisplay" class="py-5 bg-cream">
+    <div class="container">
+      <h2 class="section-title gold-underline">Available Rooms</h2>
+      <div class="row" id="roomsContainer"></div>
+    </div>
+  </section>
+
+<!-- Booking Section -->
+<section id="book" class="py-5 bg-cream">
+  <div class="container">
+    <h2 class="section-title gold-underline">Book Your Stay</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="luxury-booking-card">
+          <form id="bookingForm">
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <input type="text" class="form-control-luxury" id="guestName" placeholder="Full Name" required />
+              </div>
+              <div class="col-md-6 mb-4">
+                <input type="email" class="form-control-luxury" id="guestEmail" placeholder="Email Address" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <select id="roomSelect" class="form-control-luxury" required>
+                  <option value="" disabled selected>Select Room Type</option>
+                </select>
+              </div>
+              <div class="col-md-6 mb-4">
+                <input type="tel" class="form-control-luxury" id="guestPhone" placeholder="+966XXXXXXXXX" required />
+              </div>
+            </div>
+
+            <!-- Iqama / Passport -->
+            <div class="mb-3">
+              <label for="guestIqama" class="form-label">Identification Info</label>
+              <input type="text" class="form-control" id="guestIqama" placeholder="Enter your Iqama Number / Passport Number" required>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <input type="date" class="form-control-luxury" id="checkin" required />
+              </div>
+              <div class="col-md-6 mb-4">
+                <input type="date" class="form-control-luxury" id="checkout" required />
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <textarea class="form-control-luxury" rows="3" id="specialRequests" placeholder="Special Requests"></textarea>
+            </div>
+
+       <!-- In your booking form -->
+<div class="mb-3">
+  <button type="button" class="btn btn-warning" id="sendOtpBtn">
+    Send Verification Code
+  </button>
+  <small id="otpTimer" style="display: none; margin-left: 10px; color: var(--gold);"></small>
+</div>
+
+<div class="mb-3" id="otpSection" style="display: none;">
+  <label for="otpCode" class="form-label">Verification Code</label>
+  <input type="text" class="form-control" id="otpCode" placeholder="6-digit code" required>
+  <small class="text-muted">Check your email/phone for the code</small>
+</div>
+<button type="submit" class="btn btn-luxury btn-block">Request Booking</button>
+            <p id="bookingStatus" class="text-center mt-4"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Update the booking summary section -->
+<div id="bookingSummary" style="display: none;" class="mt-5">
+  <div class="card bg-light border-gold">
+    <div class="card-body">
+      <h4 class="card-title text-center gold-text">Your Booking Request</h4>
+      <p><strong>Status:</strong> <span class="badge bg-warning text-dark">Pending Approval</span></p>
+      <p><strong>Room:</strong> <span id="summaryRoom"></span></p>
+      <p><strong>Name:</strong> <span id="summaryName"></span></p>
+      <p><strong>Email:</strong> <span id="summaryEmail"></span></p>
+      <p><strong>Phone:</strong> <span id="summaryPhone"></span></p>
+      <p><strong>Iqama/Passport:</strong> <span id="summaryIqama"></span></p>
+      <p><strong>Check-in:</strong> <span id="summaryCheckin"></span></p>
+      <p><strong>Check-out:</strong> <span id="summaryCheckout"></span></p>
+      <p><strong>Request ID:</strong> <span id="summaryId"></span></p>
+      <div class="alert alert-info mt-3">
+        We've sent a confirmation to your email. You'll receive another email once your booking is approved.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Rest of your HTML -->
+<!-- View Booking Section -->
+<section id="viewBookingSection" class="py-5 bg-cream">
+  <div class="container">
+    <h2 class="section-title gold-underline">Retrieve Your Booking</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="luxury-booking-card">
+          <form id="viewBookingForm">
+            <div class="row">
+              <div class="col-md-6 mb-4">
+                <input type="email" class="form-control-luxury" id="lookupEmail" placeholder="Email Address" required />
+              </div>
+              <div class="col-md-6 mb-4">
+                <input type="text" class="form-control-luxury" id="lookupId" placeholder="Booking ID (optional)" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-luxury btn-block">Find My Booking</button>
+            <div id="lookupStatus" class="text-center mt-4"></div>
+          </form>
+
+</section>
+
+
+<section id="gallery" class="py-5 bg-cream">
+  <div class="container">
+    <h2 class="section-title gold-underline">Our Gallery</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791570/IMG-20250716-WA0082_ykhhld.jpg" class="img-fluid rounded shadow" alt="Gallery Image 1" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791581/IMG-20250717-WA0004_dq9crh.jpg" class="img-fluid rounded shadow" alt="Gallery Image 2" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791539/IMG-20250716-WA0043_ma0tbo.jpg" class="img-fluid rounded shadow" alt="Gallery Image 3" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791539/IMG-20250716-WA0044_syvlxb.jpg" class="img-fluid rounded shadow" alt="Gallery Image 4" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791540/IMG-20250716-WA0045_mlig7e.jpg" class="img-fluid rounded shadow" alt="Gallery Image 5" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791559/IMG-20250716-WA0074_yicicz.jpg" class="img-fluid rounded shadow" alt="Gallery Image 6" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791570/IMG-20250716-WA0078_d4cfk5.jpg" class="img-fluid rounded shadow" alt="Gallery Image 7" />
+      </div>
+      <div class="col-md-4 mb-4">
+        <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791581/IMG-20250717-WA0005_vrnw8e.jpg" class="img-fluid rounded shadow" alt="Gallery Image 8" />
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- About Section -->
+  <section id="about" class="py-5 bg-dark text-white">
+    <div class="container">
+      <h2 class="section-title gold-underline">About SULTANA Residence</h2>
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <p class="lead">Established in 2025, Sultana Residence- Riyadh has set the standard for luxury accommodations.</p>
+          <p>Established in 2025, Sultana Residence – Riyadh sets the standard for refined luxury and exceptional hospitality in the heart of the city.
+
+Blending modern elegance with traditional charm, we offer thoughtfully designed suites, personalized service, and a tranquil atmosphere tailored to every guest. From short stays to extended visits, our commitment to comfort, detail, and excellence ensures an experience that is both memorable and uniquely sophisticated.</p>
+        </div>
+        <div class="col-lg-6">
+          <img src="https://res.cloudinary.com/dkrzod2td/image/upload/v1752791540/IMG-20250716-WA0047_kznowu.jpg" class="img-fluid rounded" alt="Hotel Lobby" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.getElementById('contactForm');
+    const contactStatus = document.getElementById('contactStatus');
+
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('contactName').value.trim();
+        const email = document.getElementById('contactEmail').value.trim();
+        const message = document.getElementById('contactMessage').value.trim();
+
+        contactStatus.innerHTML = '';
+
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message }),
+          });
+
+          const result = await res.json();
+
+          if (result.success) {
+            contactStatus.innerHTML = `<div class="alert alert-success">✅ Message sent successfully!</div>`;
+            contactForm.reset();
+          } else {
+            contactStatus.innerHTML = `<div class="alert alert-danger">❌ Failed to send message.</div>`;
+          }
+        } catch (err) {
+          contactStatus.innerHTML = `<div class="alert alert-danger">❌ Error sending message.</div>`;
+          console.error('Contact form error:', err);
+        }
+
+        contactForm.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+  });
+</script>
+
+    <footer class="bg-dark text-gold py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5>SULTANA RESIDENCE</h5>
+          <p>Redefining luxury hospitality since 2025</p>
+        </div>
+        <div class="col-md-6 text-md-end">
+          <div class="social-icons">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+          </div>
+        </div>
+      </div>
+      <hr class="gold-divider" />
+      <p class="text-center mb-0">&copy; 2025 Sultana Residence. All rights reserved.</p>
+    </div>
+  </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="script.js"></script>
+</body>
+</html>
+
+<!-- Contact Section -->
+<section id="contact" class="py-5 bg-cream">
+  <div class="container">
+    <h2 class="section-title gold-underline">Contact Us</h2>
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="luxury-booking-card">
+          <form id="contactForm">
+            <div class="mb-4">
+              <input type="text" class="form-control-luxury" id="contactName" placeholder="Your Name" required />
+            </div>
+            <div class="mb-4">
+              <input type="email" class="form-control-luxury" id="contactEmail" placeholder="Your Email" required />
+            </div>
+            <div class="mb-4">
+              <textarea class="form-control-luxury" id="contactMessage" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-luxury btn-block">Send Message</button>
+            <div id="contactStatus" class="mt-3"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
